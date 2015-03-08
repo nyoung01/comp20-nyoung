@@ -1,9 +1,9 @@
 
 function parse() {
 	request = new XMLHttpRequest();
-	request.open("GET", "data.json", true);
-	xhr.onreadystatechange = parseData;
-	xhr.send();
+	request.open("get", "data.json", true);
+	request.onreadystatechange = parseData;
+	request.send();
 
 function parseData() {
 	console.log("in callback " + request.readyState);
