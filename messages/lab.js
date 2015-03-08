@@ -1,6 +1,5 @@
 
 function parse() {
-	conse.log("HI");
 	request = new XMLHttpRequest();
 	request.open("GET", "data.json", true);
 	xhr.onreadystatechange = parseData;
