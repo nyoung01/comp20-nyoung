@@ -1,5 +1,6 @@
 console.log("in script!");
-function parse() {
+function parse() 
+{
 	console.log("first flag");
 	request = new XMLHttpRequest();
 	request.open("get", "data.json", true);
@@ -8,11 +9,15 @@ function parse() {
 	request.send();
 }
 
-function parseData() {
+function parseData() 
+{
 	console.log("in callback " + request.readyState);
 	if (request.readyState == 4 && request.status == 200) {
 		alert("Got data back!");
-		data = JSON.parse(request.responseText);
-		document.getElementById("messages").innerHTML = request.responseText;
+		data = JSON.parse(request.response);
+		for (i = 0; i < data.length; i++) {
+			result += "<p>" + data[i]["content"] + " - " + data[i]['username'] + "</p>";
+		}
+		document.getElementById("messages").innerHTML = request.response;
 	}
 }
