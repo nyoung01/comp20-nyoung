@@ -6,6 +6,7 @@ function parse() {
 	console.log("second flag");
 	request.onreadystatechange = parseData;
 	request.send();
+}
 
 function parseData() {
 	console.log("in callback " + request.readyState);
