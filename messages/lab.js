@@ -14,6 +14,5 @@ function parseData()
 		for (i = 0; i < data.length; i++) {
 			result.innerHTML += "<p>" + data[i].content + " - " + data[i].username + "</p>";
 		}
-		//document.getElementById("messages").innerHTML = request.responseText;
 	}
 }
