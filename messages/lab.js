@@ -1,4 +1,4 @@
-
+console.log("in script!");
 function parse() {
 	console.log("first flag");
 	request = new XMLHttpRequest();
