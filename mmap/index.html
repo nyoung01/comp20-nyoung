@@ -11,16 +11,44 @@
 			var currLat = 0;
 			var currLng = 0;
 			var request = new XMLHttpRequest();
-			var myLocation = new google.maps.LatLng(currLat, currLng);
+			var current = new google.maps.LatLng(currLat, currLng);
 			var map;
-			function init() {
+
+			function init() 
+			{
 				var mapOptions = {
-					center: { lat: 42.4069, lng: -71.1198},
+					center: current,
 					zoom: 13,
 				};
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 			}
-			//google.maps.event.addDomListener(window, 'load', init);
+
+			function myLocation() 
+			{
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function(position) {
+						currLat = position.coords.latitude;
+						currLng = position.coords.longitude;
+						render();
+					});
+				}
+				else {
+					alert("ERROR: Geolocation not supported");
+				}
+			}
+
+			function render()
+			{
+				current = new google.maps.LatLng(currLat, currLng);
+
+				map.panTo(current);
+
+				maker = new google.maps.Marker({
+					position: current
+				});
+				marker.setMap(map)
+
+			}
 		</script>
 	</head>
 	
