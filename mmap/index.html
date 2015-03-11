@@ -13,6 +13,7 @@
 			var request = new XMLHttpRequest();
 			var current = new google.maps.LatLng(currLat, currLng);
 			var map;
+			var marker;
 			var mapOptions = {
 				center: current,
 				zoom: 13,
@@ -45,7 +46,7 @@
 
 				map.panTo(current);
 
-				maker = new google.maps.Marker({
+				marker = new google.maps.Marker({
 					position: current
 				});
 				marker.setMap(map)
