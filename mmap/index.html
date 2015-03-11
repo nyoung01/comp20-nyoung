@@ -24,6 +24,9 @@
 			{
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 				myLocation();
+
+				request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
+				request.send("login=AnitaHolleman&lat=" + currLat + "&lng" + currLng);
 			}
 
 			function myLocation() 
