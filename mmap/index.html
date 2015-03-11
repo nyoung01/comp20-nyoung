@@ -13,14 +13,16 @@
 			var request = new XMLHttpRequest();
 			var current = new google.maps.LatLng(currLat, currLng);
 			var map;
+			var mapOptions = {
+				center: current,
+				zoom: 13,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
 
 			function init() 
 			{
-				var mapOptions = {
-					center: current,
-					zoom: 13,
-				};
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+				myLocation();
 			}
 
 			function myLocation() 
