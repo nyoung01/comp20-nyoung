@@ -80,6 +80,7 @@
 				if (request.readyState == 4 && request.status == 200) {
 					console.log("about to parse!")
 					data = JSON.parse(request.responseText);
+					console.log(data.length);
 				}
 			}
 		</script>
