@@ -12,6 +12,7 @@
 			var currLng = 0;
 			var request = new XMLHttpRequest();
 			var params;
+			var data;
 			var current = new google.maps.LatLng(currLat, currLng);
 			var map;
 			var marker;
@@ -57,9 +58,15 @@
 				map.panTo(current);
 
 				marker = new google.maps.Marker({
-					position: current
+					position: current,
+					title: "AnitaHolleman"
 				});
-				marker.setMap(map)
+				marker.setMap(map);
+
+				google.maps.event.addListener(marker, "click", function() {
+					infowindow.setContent(marker.title);
+					infowindow.open(map, marker);
+				})
 			}
 
 			function parseData()
