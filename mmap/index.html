@@ -69,6 +69,7 @@
 					console.log("did not get JSON file!");
 				//request is ready and status code is successful
 				if (request.readyState == 4 && request.status == 200) {
+					console.log("about to parse!")
 					data = JSON.parse(request.responseText);
 				}
 			}
