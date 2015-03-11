@@ -9,18 +9,18 @@
 		
 		<script type = "text/javascript">
 			var currLat = 0;
-			var currLong = 0;
+			var currLng = 0;
 			var request = new XMLHttpRequest();
-			var myLocation = new google.maps.LatLng(currLat, currLong);
+			var myLocation = new google.maps.LatLng(currLat, currLng);
 			var map;
 			function init() {
 				var mapOptions = {
 					center: { lat: 42.4069, lng: -71.1198},
-					zoom: 8
+					zoom: 13;
 				};
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 			}
-			google.maps.event.addDomListener(window, 'load', init);
+			//google.maps.event.addDomListener(window, 'load', init);
 		</script>
 	</head>
 	
