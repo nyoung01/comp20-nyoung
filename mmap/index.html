@@ -11,6 +11,7 @@
 			var currLat = 0;
 			var currLng = 0;
 			var request = new XMLHttpRequest();
+			var params;
 			var current = new google.maps.LatLng(currLat, currLng);
 			var map;
 			var marker;
@@ -25,8 +26,12 @@
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 				myLocation();
 
+				params = "login=AnitaHolleman&lat=" + currLat + "&lng" + currLng;
 				request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
-				request.send("login=AnitaHolleman&lat=" + currLat + "&lng" + currLng);
+
+				http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				
+				request.send(params);
 			}
 
 			function myLocation() 
