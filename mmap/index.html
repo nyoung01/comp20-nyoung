@@ -16,6 +16,7 @@
 			var current = new google.maps.LatLng(currLat, currLng);
 			var map;
 			var marker;
+			var infowindow;
 			var mapOptions = {
 				center: current,
 				zoom: 13,
@@ -64,6 +65,7 @@
 				marker.setMap(map);
 
 				google.maps.event.addListener(marker, "click", function() {
+					infowindow = new google.maps.InfoWindow();
 					infowindow.setContent(marker.title);
 					infowindow.open(map, marker);
 				})
