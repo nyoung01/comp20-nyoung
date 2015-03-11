@@ -64,8 +64,9 @@
 
 			function parseData()
 			{
+				console.log("in parseData");
 				if (request.responseText == null)
-					console.log("did not get JSON file!")
+					console.log("did not get JSON file!");
 				//request is ready and status code is successful
 				if (request.readyState == 4 && request.status == 200) {
 					data = JSON.parse(request.responseText);
