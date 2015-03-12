@@ -82,7 +82,7 @@
 
 				google.maps.event.addListener(marker, "click", function() {
 					var infowindow = new google.maps.InfoWindow;
-					infowindow.setContent("<div id='windowContent'><div id='login'>" + marker.title + "</div>" + distance + " mile(s) away</div>");
+					infowindow.setContent("<div id='windowContent'><div id='login'>" + this.title + "</div>" + distance + " mile(s) away</div>");
 					infowindow.open(map, this);
 					setTimeout(function () { infowindow.close(); }, 5000);
 				});
