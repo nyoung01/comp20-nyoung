@@ -42,7 +42,6 @@
 				else {
 					alert("ERROR: Geolocation not supported");
 				}
-				console.log(currLat + " " + currLng);
 			}
 
 			function render()
@@ -85,8 +84,8 @@
 					console.log("about to parse!");
 					data = JSON.parse(request.responseText);
 					for (i = 0; i < data.length; i++) {
+						console.log(data[i].login);
 					}
-					console.log(data.length);
 				}
 			}
 		</script>
