@@ -35,7 +35,7 @@
 				myLocation();
 			}
 
-			//find my location using geolocation
+			// find my location using geolocation
 			function myLocation() 
 			{
 				if (navigator.geolocation) {
@@ -51,7 +51,7 @@
 				}
 			}
 
-			//render map centered on my current location
+			// render map centered on my current location
 			function render()
 			{
 				current = new google.maps.LatLng(currLat, currLng);
@@ -73,7 +73,7 @@
 				});
 			}
 
-			//create a new marker for a person at a specific latitude and longitude
+			// create a new marker for a person at a specific latitude and longitude
 			function createMarker(person)
 			{
 				var distance = findDistance(person);
@@ -90,7 +90,7 @@
 				});
 			}
 
-			//use the Haversine Formula to determine the distance between two coordinates
+			// use the Haversine Formula to determine the distance between two coordinates
 			function findDistance(person)
 			{
 				if (Number.prototype.toRadians === undefined) {
@@ -108,13 +108,13 @@
         				Math.sin(Δλ/2) * Math.sin(Δλ/2);
 				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-				var d = (R * c) / 1609.34;
-				d = Math.round(d * 100) / 100;
+				var d = (R * c) / 1609.34; // get distance in miles
+				d = Math.round(d * 100) / 100; // round to two decimal places
 
 				return d;
 			}
 
-			//send our data to the given datastore and manage the JSON given back
+			// send our data to the given datastore and manage the JSON given back
 			function manageData() 
 			{
 					params = "login=" + myName + "&lat=" + currLat + "&lng=" + currLng;
@@ -124,10 +124,10 @@
 					request.send(params);	
 			}
 
-			//parse through the JSON, for each person, make a new marker
+			// parse through the JSON, for each person, make a new marker
 			function parseData()
 			{
-				//request is ready and status code is successful
+				// request is ready and status code is successful
 				if (request.readyState == 4 && request.status == 200) {
 					data = JSON.parse(request.responseText);
 					for (i = 0; i < data.length; i++) {
