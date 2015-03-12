@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="mmap_style.css" />
 		
 		<script>
+			var myName = "AnitaHolleman";
 			var currLat;
 			var currLng;
 			var request = new XMLHttpRequest;
@@ -55,11 +56,16 @@
 
 				map.panTo(current);
 
+				var image = {
+					url: 'marker_icon.png',
+					size: new google.maps.Size(20, 32),
+				}
+
 				myMarker = new google.maps.Marker({
 					position: current,
-					title: "AnitaHolleman",
+					title: myName,
 					animation: google.maps.Animation.DROP,
-					icon: 'marker_icon.png'
+					icon: image
 				});
 				myMarker.setMap(map);
 
@@ -126,7 +132,7 @@
 				if (request.readyState == 4 && request.status == 200) {
 					data = JSON.parse(request.responseText);
 					for (i = 0; i < data.length; i++) {
-						if (data[i].login == 'AnitaHolleman') continue;
+						if (data[i].login == myName) continue;
 						person.name = data[i].login;
 						person.Lat = data[i].lat;
 						person.Lng = data[i].lng;
