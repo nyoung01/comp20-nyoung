@@ -57,7 +57,9 @@
 
 				marker = new google.maps.Marker({
 					position: current,
-					title: "AnitaHolleman"
+					title: "AnitaHolleman",
+					animation: google.maps.Animation.DROP,
+					icon: 'marker_icon.png'
 				});
 				marker.setMap(map);
 
@@ -76,12 +78,13 @@
 				});
 
 				google.maps.event.addListener(marker, 'click', function() {
+					var info = new google.maps.InfoWindow
 					infowindow.close();
 					infowindow.setContent(person.name);
 					infowindow.open(map, this);
 				});
 			}
-			
+
 			function manageData() 
 			{
 					params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
@@ -103,6 +106,9 @@
 					console.log("about to parse!");
 					data = JSON.parse(request.responseText);
 					for (i = 0; i < data.length; i++) {
+						if (person.name == "AnitaHolleman") {
+							continue;
+						}
 						person.name = data[i].login;
 						person.Lat = data[i].lat;
 						person.Lng = data[i].lng;
