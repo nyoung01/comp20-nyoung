@@ -27,18 +27,6 @@
 			{
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 				myLocation();
-				console.log(currLat + " " + currLng);
-
-				if (currLat !== undefined && currLng !== undefined) {
-					params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
-					request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
-
-					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-					request.onreadystatechange = parseData;
-
-					request.send(params);
-				}
 			}
 
 			function myLocation() 
@@ -48,6 +36,7 @@
 						currLat = position.coords.latitude;
 						currLng = position.coords.longitude;
 						render();
+						manageData();
 					});
 				}
 				else {
@@ -73,6 +62,19 @@
 					infowindow.setContent(marker.title);
 					infowindow.open(map, marker);
 				});
+			}
+
+			function manageData() 
+			{
+					params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
+					console.log(params);
+					request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
+
+					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+					request.onreadystatechange = parseData;
+
+					request.send(params);	
 			}
 
 			function parseData()
