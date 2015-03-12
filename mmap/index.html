@@ -46,12 +46,12 @@
 						currLat = position.coords.latitude;
 						currLng = position.coords.longitude;
 						render();
-						console.log(currLat + " " + currLng);
 					});
 				}
 				else {
 					alert("ERROR: Geolocation not supported");
 				}
+				console.log(currLat + " " + currLng);
 			}
 
 			function render()
