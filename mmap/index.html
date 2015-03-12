@@ -113,7 +113,7 @@
 
 			function manageData() 
 			{
-					params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
+					params = "login=" + myName + "&lat=" + currLat + "&lng=" + currLng;
 					console.log(params);
 					request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
 					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
