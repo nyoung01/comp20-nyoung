@@ -106,7 +106,7 @@
 					console.log("about to parse!");
 					data = JSON.parse(request.responseText);
 					for (i = 0; i < data.length; i++) {
-						if (person.name == 'AnitaHolleman') continue;
+						//if (person.name == 'AnitaHolleman') continue;
 						person.name = data[i].login;
 						person.Lat = data[i].lat;
 						person.Lng = data[i].lng;
