@@ -78,10 +78,16 @@
 					position: new google.maps.LatLng(person.Lat, person.Lng),
 					title: person.name
 				});
+				var contentString = <div id="windowContent" +
+					'<p>' + person.name '</p>'+
+				    '<p>' + distance ' mile(s) away</p>' +
+				    '</div>';
 
 				google.maps.event.addListener(marker, "click", function() {
-					var infowindow = new google.maps.InfoWindow;
-					infowindow.setContent(marker.title + "\n" + distance + " mile(s) away");
+					var infowindow = new google.maps.InfoWindow ({
+						content: contentString
+					});
+					//infowindow.setContent(marker.title + "\n" + distance + " mile(s) away");
 					infowindow.open(map, this);
 					setTimeout(function () { infowindow.close(); }, 5000);
 				});
@@ -107,7 +113,6 @@
 				var d = (R * c) / 1609.34;
 				d = Math.round(d * 100) / 100;
 
-				console.log(d);
 				return d;
 			}
 
