@@ -8,9 +8,9 @@
 		<link rel="stylesheet" href="mmap_style.css" />
 		
 		<script type = "text/javascript">
-			var currLat = 0;
-			var currLng = 0;
-			var request;
+			var currLat;
+			var currLng;
+			var request = new XMLHttpRequest;
 			var params;
 			var data;
 			var current;
@@ -29,16 +29,16 @@
 				myLocation();
 				console.log(currLat + " " + currLng);
 
-				request = new XMLHttpRequest();
+				if (currLat != undefined && currLng != undefined) {
+					params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
+					request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
 
-				params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
-				request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
+					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					request.onreadystatechange = parseData;
 
-				request.onreadystatechange = parseData;
-
-				request.send(params);
+					request.send(params);
+				}
 			}
 
 			function myLocation() 
