@@ -70,7 +70,7 @@
 					myInfowindow = new google.maps.InfoWindow();
 					myInfowindow.setContent("<div id='login'>" + myMarker.title + "</div>");
 					myInfowindow.open(map, myMarker);
-					setTimeout(function () { infowindow.close(); }, 5000);
+					setTimeout(function () { myInfowindow.close(); }, 5000);
 				});
 			}
 
