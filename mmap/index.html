@@ -13,7 +13,7 @@
 			var request = new XMLHttpRequest();
 			var params;
 			var data;
-			var current = new google.maps.LatLng(currLat, currLng);
+			var current;
 			var map;
 			var marker;
 			var infowindow;
@@ -27,9 +27,9 @@
 			{
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 				myLocation();
+				console.log(currLat + " " + currLng);
 
 				params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
-				console.log(currLat + " " + currLng);
 				request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
 
 				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -44,10 +44,9 @@
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function(position) {
 						currLat = position.coords.latitude;
-						console.log(currLat);
 						currLng = position.coords.longitude;
-						console.log(currLng);
 						render();
+						console.log(currLat + " " + currLng);
 					});
 				}
 				else {
