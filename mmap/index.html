@@ -15,8 +15,8 @@
 			var data;
 			var current;
 			var map;
-			var marker;
-			var infowindow;
+			var mymarker;
+			var myInfowindow;
 			var mapOptions = {
 				center: current,
 				zoom: 15,
@@ -55,18 +55,18 @@
 
 				map.panTo(current);
 
-				marker = new google.maps.Marker({
+				myMarker = new google.maps.Marker({
 					position: current,
 					title: "AnitaHolleman",
 					animation: google.maps.Animation.DROP,
 					icon: 'marker_icon.png'
 				});
-				marker.setMap(map);
+				myMarker.setMap(map);
 
-				google.maps.event.addListener(marker, "click", function() {
-					infowindow = new google.maps.InfoWindow();
-					infowindow.setContent(marker.title);
-					infowindow.open(map, marker);
+				google.maps.event.addListener(myMarker, "click", function() {
+					myInfowindow = new google.maps.InfoWindow();
+					myInfowindow.setContent(myMarker.title);
+					myInfowindow.open(map, myMarker);
 				});
 			}
 
@@ -74,13 +74,14 @@
 			{
 				var marker = new google.maps.Marker({
 					map: map,
-					position: new google.maps.LatLng(person.Lat, person.Lng)
+					position: new google.maps.LatLng(person.Lat, person.Lng),
+					title: person.name
 				});
 
-				google.maps.event.addListener(marker, 'click', function() {
-					var info = new google.maps.InfoWindow
+				google.maps.event.addListener(marker, "click", function() {
+					var infowindow = new google.maps.InfoWindow
 					infowindow.close();
-					infowindow.setContent(person.name);
+					infowindow.setContent(marker.title);
 					infowindow.open(map, this);
 				});
 			}
