@@ -13,7 +13,10 @@ body {
 	height: 100%;
 }
 
+#windowContent {
+	text-align: center;
+}
+
 #login {
 	font-weight: bold;
-	text-align: center;
 }
