@@ -23,7 +23,9 @@
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
 			var person = {
-				name, Lat, Lng
+				name: undefined,
+				Lat: undefined,
+				Lng: undefined
 			};
 
 			function init() 
@@ -66,6 +68,20 @@
 				});
 			}
 
+			function createMarker(person)
+			{
+				var marker = new google.maps.Marker({
+					map: map,
+					position: new google.maps.LatLng(person.Lat, person.Lng)
+				});
+
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.close();
+					infowindow.setContent(person.name);
+					infowindow.open(map, this);
+				});
+			}
+			
 			function manageData() 
 			{
 					params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
@@ -90,7 +106,7 @@
 						person.name = data[i].login;
 						person.Lat = data[i].lat;
 						person.Lng = data[i].lng;
-						console.log(person.name + person.Lat + person.Lng);
+						createMarker(person);
 					}
 				}
 			}
