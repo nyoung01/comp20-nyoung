@@ -42,8 +42,8 @@
 					navigator.geolocation.getCurrentPosition(function(position) {
 						currLat = position.coords.latitude;
 						currLng = position.coords.longitude;
-						render();
 						manageData();
+						render();
 					});
 				}
 				else {
