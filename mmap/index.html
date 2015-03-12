@@ -10,7 +10,7 @@
 		<script type = "text/javascript">
 			var currLat = 0;
 			var currLng = 0;
-			var request = new XMLHttpRequest();
+			var request;
 			var params;
 			var data;
 			var current;
@@ -28,6 +28,8 @@
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 				myLocation();
 				console.log(currLat + " " + currLng);
+
+				request = new XMLHttpRequest();
 
 				params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
 				request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
