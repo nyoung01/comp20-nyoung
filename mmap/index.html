@@ -22,6 +22,9 @@
 				zoom: 13,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			}
+			var person = {
+				'name', 'Lat', 'Lng';
+			}
 
 			function init() 
 			{
@@ -84,7 +87,10 @@
 					console.log("about to parse!");
 					data = JSON.parse(request.responseText);
 					for (i = 0; i < data.length; i++) {
-						console.log(data[i].login);
+						person.name = data[i].login;
+						person.Lat = data[i].lat;
+						person.Lng = data[i].lng;
+						console.log(person.name + person.Lat + person.Lng);
 					}
 				}
 			}
