@@ -17,7 +17,7 @@
 			var current;
 			var map;
 			var mymarker;
-			var myInfowindow;
+			var infowindow = new google.maps.InfoWindow();
 			var mapOptions = {
 				center: current,
 				zoom: 15,
@@ -67,10 +67,9 @@
 				myMarker.setMap(map);
 
 				google.maps.event.addListener(myMarker, "click", function() {
-					myInfowindow = new google.maps.InfoWindow();
-					myInfowindow.setContent("<div id='login'>" + myMarker.title + "</div>");
-					myInfowindow.open(map, myMarker);
-					setTimeout(function () { myInfowindow.close(); }, 5000);
+					infowindow.close();
+					infowindow.setContent("<div id='login'>" + myMarker.title + "</div>");
+					infowindow.open(map, this);
 				});
 			}
 
@@ -85,10 +84,9 @@
 				});
 
 				google.maps.event.addListener(marker, "click", function() {
-					var infowindow = new google.maps.InfoWindow;
+					infowindow.close();
 					infowindow.setContent("<div id='windowContent'><div id='login'>" + this.title + "</div>" + distance + " mile(s) away</div>");
 					infowindow.open(map, this);
-					setTimeout(function () { infowindow.close(); }, 5000);
 				});
 			}
 
