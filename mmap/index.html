@@ -56,16 +56,12 @@
 
 				map.panTo(current);
 
-				var image = {
-					url: 'marker_icon.png',
-					size: new google.maps.Size(20, 32)
-				}
-
 				myMarker = new google.maps.Marker({
 					position: current,
 					title: myName,
 					animation: google.maps.Animation.DROP,
-					icon: image
+					icon: 'marker_icon.png',
+					new google.maps.Size(42, 68)
 				});
 				myMarker.setMap(map);
 
