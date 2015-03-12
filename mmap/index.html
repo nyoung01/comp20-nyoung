@@ -19,7 +19,7 @@
 			var infowindow;
 			var mapOptions = {
 				center: current,
-				zoom: 20,
+				zoom: 15,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
 			var person = {
@@ -90,11 +90,8 @@
 					params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
 					console.log(params);
 					request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
-
 					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
 					request.onreadystatechange = parseData;
-
 					request.send(params);	
 			}
 
@@ -106,7 +103,7 @@
 					console.log("about to parse!");
 					data = JSON.parse(request.responseText);
 					for (i = 0; i < data.length; i++) {
-						//if (person.name == 'AnitaHolleman') continue;
+						if (data[i].login == 'AnitaHolleman') continue;
 						person.name = data[i].login;
 						person.Lat = data[i].lat;
 						person.Lng = data[i].lng;
