@@ -81,7 +81,7 @@
 
 				google.maps.event.addListener(marker, "click", function() {
 					var infowindow = new google.maps.InfoWindow
-					infowindow.setContent(marker.title);
+					infowindow.setContent("login: " + marker.title + "\n" distance " miles away");
 					infowindow.open(map, this);
 					setTimeout(function () { infowindow.close(); }, 5000);
 				});
@@ -89,7 +89,19 @@
 
 			function findDistance(person)
 			{
-				console.log(currLat + currLng);
+				var R = 6371000; // earth's radius in meters
+				var φ1 = currLat.toRadians(), λ1 = currLng.toRadians();
+				var φ2 = person.Lat.toRadians(), λ2 = person.Lng.toRadians();
+			    var Δφ = φ2 - φ1;
+    			var Δλ = λ2 - λ1;
+
+				var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+        				Math.cos(φ1) * Math.cos(φ2) *
+        				Math.sin(Δλ/2) * Math.sin(Δλ/2);
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+				var d = (R * c) / 1609.34;
+				return d;
 			}
 
 			function manageData() 
