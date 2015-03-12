@@ -89,15 +89,13 @@
 
 			function findDistance(person)
 			{
-				if (typeof(Number.prototype.toRad) === undefined) {
-  					Number.prototype.toRad = function() {
-    					return this * Math.PI / 180;
-  					}
+				if (Number.prototype.toRadians === undefined) {
+    				Number.prototype.toRadians = function() { return this * Math.PI / 180; };
 				}
 
 				var R = 6371000; // earth's radius in meters
-				var φ1 = currLat.toRad(), λ1 = currLng.Math.toRad();
-				var φ2 = person.Lat.toRad(), λ2 = person.Lng.toRad();
+				var φ1 = currLat.toRadians(), λ1 = currLng.toRadians();
+				var φ2 = person.Lat.toRadians(), λ2 = person.Lng.toRadians();
 			    var Δφ = φ2 - φ1;
     			var Δλ = λ2 - λ1;
 
