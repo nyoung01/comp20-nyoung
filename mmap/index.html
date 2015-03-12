@@ -81,7 +81,7 @@
 
 				google.maps.event.addListener(marker, "click", function() {
 					var infowindow = new google.maps.InfoWindow
-					infowindow.setContent("login: " + marker.title + "\n" distance " miles away");
+					infowindow.setContent("login: " + marker.title + ", " distance " miles away");
 					infowindow.open(map, this);
 					setTimeout(function () { infowindow.close(); }, 5000);
 				});
