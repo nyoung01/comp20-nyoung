@@ -35,6 +35,7 @@
 				myLocation();
 			}
 
+			//find my location using geolocation
 			function myLocation() 
 			{
 				if (navigator.geolocation) {
@@ -50,6 +51,7 @@
 				}
 			}
 
+			//render map centered on my current location
 			function render()
 			{
 				current = new google.maps.LatLng(currLat, currLng);
@@ -68,9 +70,11 @@
 					myInfowindow = new google.maps.InfoWindow();
 					myInfowindow.setContent("<div id='login'>" + myMarker.title + "</div>");
 					myInfowindow.open(map, myMarker);
+					setTimeout(function () { infowindow.close(); }, 5000);
 				});
 			}
 
+			//create a new marker for a person at a specific latitude and longitude
 			function createMarker(person)
 			{
 				var distance = findDistance(person);
@@ -88,6 +92,7 @@
 				});
 			}
 
+			//use the Haversine Formula to determine the distance between two coordinates
 			function findDistance(person)
 			{
 				if (Number.prototype.toRadians === undefined) {
@@ -111,6 +116,7 @@
 				return d;
 			}
 
+			//send our data to the given datastore and manage the JSON given back
 			function manageData() 
 			{
 					params = "login=" + myName + "&lat=" + currLat + "&lng=" + currLng;
@@ -120,6 +126,7 @@
 					request.send(params);	
 			}
 
+			//parse through the JSON, for each person, make a new marker
 			function parseData()
 			{
 				//request is ready and status code is successful
