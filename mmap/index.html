@@ -29,6 +29,7 @@
 				myLocation();
 
 				params = "login=AnitaHolleman&lat=" + currLat + "&lng" + currLng;
+				console.log(params);
 				request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
 
 				request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -68,7 +69,7 @@
 					infowindow = new google.maps.InfoWindow();
 					infowindow.setContent(marker.title);
 					infowindow.open(map, marker);
-				})
+				});
 			}
 
 			function parseData()
@@ -77,9 +78,6 @@
 				//request is ready and status code is successful
 				if (request.readyState == 4 && request.status == 200) {
 					console.log("about to parse!");
-					if (request.responseText === null) {
-						console.log("json illegitimate!!")
-					}
 					data = JSON.parse(request.responseText);
 					if (data.length === undefined) {
 						console.log("json not defined!!!")
