@@ -29,7 +29,7 @@
 				myLocation();
 				console.log(currLat + " " + currLng);
 
-				if (currLat != undefined && currLng != undefined) {
+				if (currLat !== undefined && currLng !== undefined) {
 					params = "login=AnitaHolleman&lat=" + currLat + "&lng=" + currLng;
 					request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true)
 
