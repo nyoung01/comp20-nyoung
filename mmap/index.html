@@ -76,7 +76,10 @@
 				console.log("in parseData");
 				//request is ready and status code is successful
 				if (request.readyState == 4 && request.status == 200) {
-					console.log("about to parse!")
+					console.log("about to parse!");
+					if (request.responseText === null) {
+						console.log("json illegitimate!!")
+					}
 					data = JSON.parse(request.responseText);
 					if (data.length === undefined) {
 						console.log("json not defined!!!")
