@@ -65,7 +65,7 @@
 
 				google.maps.event.addListener(myMarker, "click", function() {
 					myInfowindow = new google.maps.InfoWindow();
-					myInfowindow.setContent(myMarker.title);
+					myInfowindow.setContent("<div id='login'>" + myMarker.title + "</div>");
 					myInfowindow.open(map, myMarker);
 				});
 			}
