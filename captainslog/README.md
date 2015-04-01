@@ -1,3 +1,6 @@
+Norman Young
+Lab 7 - Captains Log
+
 To the best of my knowledge, everything is implemented correctly, according to the specs
 
 Did not discuss this lab with anyone
