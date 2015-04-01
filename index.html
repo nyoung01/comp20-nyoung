@@ -6,11 +6,22 @@
     <title>Captain's Log</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
+
+            $(document).ready(function() {
+                $("#log").append(localStorage["log"]);
+            });
+
             $(document).keypress(function(e) {
-                if(e.which == 13) {
-                    $("#log").append("#msg");
+                if(e.which == 13) { 
+                        var time = new Date();
+                        $("#log").append(time.toUTCString());
+                        $("#log").append(" - ")
+                        $("#log").append($("#msg").val());
+                        $("#log").append("<br/>");
+                        localStorage["log"] = log.innerHTML;
                 }
             });
+
     </script>
 </head>
 
