@@ -128,9 +128,8 @@
 			function manageData() 
 			{
 					params = "login=" + myName + "&lat=" + currLat + "&lng=" + currLng;
-					/*request.open("POST", "https://sleepy-reaches-1354.herokuapp.com/sendLocation", true)*/
-					console.log("about to post\n");
-					request.open("POST", "http://localhost:3000");
+					request.open("POST", "https://sleepy-reaches-1354.herokuapp.com/sendLocation", true);
+					/*request.open("POST", "http://localhost:3000");*/
 					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					request.onreadystatechange = parseData;
 					request.send(params);	
