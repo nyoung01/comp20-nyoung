@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+.software {
+    background-image: url("software.png");
+=======
 
 .software {
 	background-image: url("software.png"); 
@@ -58,4 +62,5 @@
 	.software{
 		background-position: -507px -238px;
 	}
+>>>>>>> 24ab6fc7aa487933e6d4b4a1ad1e950ef4c354ae
 }
