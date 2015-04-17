@@ -31,23 +31,17 @@
 
 			function init() 
 			{
-				console.log("initing");
 				map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-				console.log("end of init");
 				myLocation();
 			}
 
 			// find my location using geolocation
 			function myLocation() 
 			{
-				console.log("navigator?");
 				if (navigator.geolocation) {
-					console.log("yea");
 					navigator.geolocation.getCurrentPosition(function(position) {
-						console.log("getting");
 						currLat = position.coords.latitude;
 						currLng = position.coords.longitude;
-						console.log("going to manage");
 						manageData();
 						render();
 					});
@@ -133,7 +127,6 @@
 			// send our data to the given datastore and manage the JSON given back
 			function manageData() 
 			{
-					console.log("going to send");
 					params = "login=" + myName + "&lat=" + currLat + "&lng=" + currLng;
 					request.open("POST", "https://sleepy-reaches-1354.herokuapp.com/sendLocation", true);
 					/*request.open("POST", "http://localhost:3000/sendLocation");*/
