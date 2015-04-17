@@ -108,16 +108,6 @@
         				Math.sin(k/2) * Math.sin(k/2);
 				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-				/*var φ1 = currLat.toRadians(), λ1 = currLng.toRadians();
-				var φ2 = person.Lat.toRadians(), λ2 = person.Lng.toRadians();
-			    var Δφ = φ2 - φ1;
-    			var Δλ = λ2 - λ1;
-
-				var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-        				Math.cos(φ1) * Math.cos(φ2) *
-        				Math.sin(Δλ/2) * Math.sin(Δλ/2);
-				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));*/
-
 				var d = (R * c) / 1609.34; // get distance in miles
 				d = Math.round(d * 100) / 100; // round to two decimal places
 
@@ -129,10 +119,8 @@
 			{
 					params = "login=" + myName + "&lat=" + currLat + "&lng=" + currLng;
 					request.open("POST", "https://sleepy-reaches-1354.herokuapp.com/sendLocation", true);
-					/*request.open("POST", "http://localhost:3000/sendLocation");*/
 					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					request.onreadystatechange = parseData;
-					console.log(params);
 					request.send(params);	
 			}
 
