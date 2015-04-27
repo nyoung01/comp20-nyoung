@@ -2,14 +2,113 @@
 <html>
 <head>
     <title>Marauder's Map Security Report</title>
-    <link rel="stylesheet" type="text/css" href="style.css"></link>
+
+	<link rel="stylesheet" href="bootstrap3/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="bootstrap3/css/bootstrap-theme.min.css"></link>
+	<script src="bootstrap3/js/bootstrap.min.js"></script>
 
    	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="bootstrap-lightbox/bootstrap-lightbox.min.ss" type="text/css" media="screen" />
-    <script type="text/javascript" src="bootstrap-lightbox/bootstrap-lightbox.min.js"></script>
 </head>
 
 <body>
+	<div class="container">
 	<h1>Marauder's Map Security Report</h1>
+	<p>Prepared by <a href="http://nyoung01.github.io">Norman Young</a> &bull; 4/30/2013</p>
+
+	<h2>Introduction</h2>
+	<p>For this assignment, I test the security of the <a href="https://sleepy-reaches-1354.herokuapp.com">Marauder's Map</a> web application developed by Ayal Pierce. According to the specs of the <a href = "http://tuftsdev.github.io/WebProgramming/assignments/a3.html">COMP20 Assignment</a>, students are to "build a web application that maintains 'location check-ins' (login, latitude, and longitude) for a long period of time." The web application as three features: a POST API, a GET API, and a homepage, showing the locations and logins recorded.</p>
+
+	<p>This document aims to identify certain security vulnerabilities that will make this web application unsuitable for public use.</p>
+
+	<h2>Methodology</h2>
+	<p>By running the code locally and using the "black-box" method, I was able to find an injection security flaw. After looking at the code, I was able to notice more vulnerabilities with the location.json GET API. I used the Postman Chrome App to inject Javascript, and for the location.json testing, just used a web browser and went to localhost:3000/location.json</p>
+
+	<h2>Abstract of Findings</h2>
+	<p>All of the security vulnerabilities found have to do with user input. More careful consideration of all input possibilities, and always making sure that only one response is set for every request, will prevent an insecure web app.</p>
+
+	<h2>Issues Found</h2>
+	<ol>
+	<li><p><strong>XSS (Cross-Site Scripting) Vulnerability</strong></p>
+		<ul>
+		<li>Location: Injection via the POST API, effects the homepage</li>
+		<li>Severity of issue: HIGH. Any cases where clients can inject client-side Javascript into fields can lead to malicious handling of the data.</li>
+		<li>Using Postman, I injected Javascript into the login field and checked the homepage</li>
+
+		<div class="container">
+
+		<div class="col-xs-10 col-sm-5">
+        	<a href="#" class="thumbnail" data-toggle="modal"> 
+            	<img src="issue1img1.png" alt="...">
+        	</a>
+    	</div>
+
+		<div class="col-xs-10 col-sm-5">
+        	<a href="#" class="thumbnail" data-toggle="modal"> 
+            	<img src="issue1img2.png" alt="...">
+        	</a>
+    	</div>
+    	</div>
+    	<li>Resolution: XSS is a serious problem, but can be easily fixed. Instead of reading <code>"&lt;"</code> and <code>"&gt;"</code> as script tags, we can simply fix this so that whenever <code>&lt;script&gt;&lt;/script&gt;</code> is read in, we can filter it as <code>&amp;lt;script&amp;gt;&amp;lt;script&amp;gt;</code>. This way, script tags can be read in, but Javascript will never be injected.</li> 
+    	</ul></li>
+    	<br>
+
+		<li><p><strong>Server crashes without mandatory parameter login</strong></p>
+			<ul>
+			<li>Location: GET API</li>
+			<li>Severity of issue: MODERATELY HIGH. This vulnerability makes it very easy for attackers to crash the server running. Malicious requests can be easily made, even by accident.</li>
+			<li>After looking at the code, I saw how the client handled undefined login data:
+				<pre><code>if(login == undefined){
+	response.status(500);
+	response.send("&lt;p>Mandatory Parameter is Missing&lt;/p>");
+}
+				</code></pre>
+			Seeing this, I tested it by requesting the json with a certain longitude and latitude:
+			<div class="container">
+			<div class="col-xs-10 col-sm-5">
+	        	<a href="#" class="thumbnail" data-toggle="modal"> 
+	            	<img src="issue2img1.png" alt="...">
+	        	</a>
+	    	</div>
+	    	</div>
+	    	As you can see, the desired message is shown, but the server is kept from crashing with invalid input, because multiple responses are sent.
+	    	<div class="container">
+			<div class="col-xs-20 col-sm-10">
+	        	<a href="#" class="thumbnail" data-toggle="modal"> 
+	            	<img src="issue2img2.png" alt="...">
+	        	</a>
+	    	</div>
+	    	</div>
+
+	    	<li><strong>Note:</strong> The server does not only crash when a lat or lng parameter is requested, it also crashes when no requests (an invalid JSON) are made at all (I tested this with the URL: localhost:3000/location.json). This, once again, makes it easy for accidental crashing of the servers.</li>
+	    	<li>Resolution: insert an else statement after the check for an undefined login:
+	    	<div class="container">
+			<div class="col-xs-10 col-sm-5">
+	        	<a href="#" class="thumbnail" data-toggle="modal"> 
+	            	<img src="issue2img3.png" alt="...">
+	        	</a>
+	    	</div>
+	    	</div>
+	    	This would prevent multiple responses.</li>
+	    </ul></li>
+	    <br>
+
+	    <li><p><strong>Returns all database entries with the greater than request</strong></p>
+	    	<ul>
+	    	<li>Location: GET API (location.json)</li>
+	    	<li>Severity of issue: HIGH. Having a way to access all the entries of the database is a serious security flaw. Although we do display all entries on the homepage in this case, the specs of this particular GET API requires that one and only one entry be passed back, the entry with the particular login. This flaw breaks this spec, and if the entries contain sensitive data, having this insecurity can potentially be very dangerous.</li>
+	    	<li>
+	    	<div class="container">
+			<div class="col-xs-20 col-sm-10">
+	        	<a href="#" class="thumbnail" data-toggle="modal"> 
+	            	<img src="issue3img1.png" alt="...">
+	        	</a>
+	    	</div>
+	    	</div>
+	    	<li>Resolution: We must check and make sure that the login parameter is a string. The developer checks the values, but fails to consider that the keys requested might be corrupt. Therefore, we must make sure the login key is a string, and can request nothing more.</li>
+	    </ul></li>
+	</ol>
+	<h2>Conclusion</h2>
+	<p>In general, these are all issues that are easily fixed, but are quite serious security issues nonetheless. When making a secure server, the client's input and queries must never be trusted. All instances and possible input must be accounted for. I understand that taking every possibility into account can take quite a while (can be impossible perhaps), so another way is to filter every input; shaping it so that it always fits the specs.Developing an app such as this, one must always be weary of user input. Careful filtration of these POST and GET requests will make this much more secure.</p>
+    </div>
 </body>
 </html>
